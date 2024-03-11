@@ -1,0 +1,80 @@
+
+body{
+    margin: 0;
+}
+
+*{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    box-sizing: border-box;
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 30px;
+    background-color: #b7b6b629;
+    background-image: 
+        linear-gradient(90deg, transparent 5%, rgba(0, 0, 0, 0.1) 5%, rgba(22, 18, 18, 0.1) 10%, transparent 10%),
+
+        linear-gradient(0deg, transparent 5%, rgba(0, 0, 0, 0.1) 5%, rgba(0, 0, 0, 0.1) 10%, transparent 10%);
+    background-size: 20px 20px; 
+    & nav{
+        
+    
+        & ul{
+            display: flex;
+            justify-content: space-around;
+           
+            & li{
+                margin: 0 10px;
+                list-style-type: none;
+
+                & a{
+                    text-decoration: none ;
+                    font-size: 24px;
+                    color: rgb(38, 74, 118);;
+                    
+                } 
+            }
+        }
+    }
+    button{
+        color: rgb(38, 74, 118);
+        font-size: 18px;
+        font-weight: 500;
+        border: none;
+        background: repeating-linear-gradient(45deg, #9dcde3c8, 
+        #82b2babd 5px, #c4eaf964 5px, #8cb9cb8c 10px);
+        border-radius: 12px;
+    }
+}
+
+main{
+   & section{
+    padding: 20px;
+        background: linear-gradient(90deg, rgba(54, 95, 95, 0.519) 9%, rgba(36, 72, 116, 0.771) 100%), url("./images/main-Background.png") ;
+        background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        & h1{
+                color: #fff;
+                font-size: 50px;
+                letter-spacing: 0.12cap; 
+          
+            }
+            & .your{
+                margin-left: 15rem;
+            }
+            & .progress{
+                margin-left: 35rem;
+            }
+           
+    }
+}
+
+
+
+  
+  
