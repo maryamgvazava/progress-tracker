@@ -50,13 +50,13 @@ header{
 }
 
 main{
-   & section{
+   & .mainSection{
     padding: 20px;
         background: linear-gradient(90deg, rgba(54, 95, 95, 0.519) 9%, rgba(36, 72, 116, 0.771) 100%), url("./images/main-Background.png") ;
         background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: grid;
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(8, 1fr);
             
         & h1{
                 color: #fff;
@@ -64,15 +64,119 @@ main{
                 letter-spacing: 0.12cap; 
           
             }
-            & .your{
-                margin-left: 15rem;
-            }
-            & .progress{
-                margin-left: 35rem;
-            }
+            .track {
+                grid-area: 1 / 4;
+              }
+              
+              .your {
+                grid-area: 2 / 5 / 3 / 6;
+              }
+              
+              .progress {
+                grid-area: 3 / 6 / 4 / 7;
+              }
            
     }
+
+& .controlProgressSection{
+    background-color: #82b2babd;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    
+    & div{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+
+        & button{
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: #477982e2;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+
+    & button {
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: #477982e2;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+    }
+
+    & h1{
+        color: #fff;
+        font-size: 34px;
+        font-weight: 700;
+    }
+
+    
 }
+
+
+& .activitySection{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background-color: #577b8959;
+  
+
+    & :nth-child(1){
+        background-color: #8cb9cb8c;
+    }
+    & :nth-child(2){
+        background-color: #345a698c;
+    }
+    & :nth-child(3){
+        background-color: #0232448c;
+    }
+
+    & div{
+        height: 600px;
+
+        & button{
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            background-color: #477982e2;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 500;
+            width: 100%;
+        }
+    }
+
+       
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+   
+
+
+
+}
+
+
+
 
 
 
