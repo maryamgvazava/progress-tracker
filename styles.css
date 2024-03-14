@@ -50,6 +50,7 @@ header{
 }
 
 main{
+    /* მთავარი გვერდი - სათაური */
    & .mainSection{
     padding: 20px;
         background: linear-gradient(90deg, rgba(54, 95, 95, 0.519) 9%, rgba(36, 72, 116, 0.771) 100%), url("./images/main-Background.png") ;
@@ -78,6 +79,8 @@ main{
            
     }
 
+
+    /* სექცია სადაც ვნახულობთ შედეგებს კალენდრის მიხედვით */
 & .controlProgressSection{
     background-color: #82b2babd;
     padding: 30px;
@@ -87,30 +90,10 @@ main{
     justify-content: center;
 
     
-    & div{
+    & >div{
         width: 100%;
         display: flex;
-        justify-content: space-between;
-
-        & button{
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            background-color: #477982e2;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 500;
-        }
-    }
-
-    & button {
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            background-color: #477982e2;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 500;
+        justify-content: space-between; 
     }
 
     & h1{
@@ -119,57 +102,198 @@ main{
         font-weight: 700;
     }
 
-    
+    & button{
+        border: none;
+        padding: 10px;
+        border-radius: 6px;
+        background-color: #477982e2;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+    }
 }
 
 
+
+/* აქ ვამატებთ ექთივითებს */
 & .activitySection{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    background-color: #577b8959;
+    /* background-color: #577b8959; */
   
 
-    & :nth-child(1){
-        background-color: #8cb9cb8c;
-    }
-    & :nth-child(2){
+
+    & .MealPlan{
         background-color: #345a698c;
     }
-    & :nth-child(3){
+    & .DailyPlan{
         background-color: #0232448c;
     }
 
-    & div{
-        height: 600px;
+    & > div{
+       min-height: 400px;
 
-        & button{
-            border: none;
-            padding: 10px;
-            border-radius: 6px;
-            background-color: #477982e2;
-            color: #fff;
-            font-size: 14px;
-            font-weight: 500;
-            width: 100%;
+        
+    }
+
+    & .add{
+        border: none;
+        padding: 10px;
+        border-radius: 6px;
+        background-color: #477982e2;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 500;
+        width: 100%;
+    }
+
+
+
+    & .phisicalActivity{
+        
+        & .submittedActivitySection{
+            background-color: #FFFEC4;
+          
+       & .mainSubmition{   
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 15px;
+        
+
+                & .checkDiv{
+                    display: flex;
+                    border-bottom:  solid #023244e5 1px;
+                    align-items: flex-end;
+                   
+               
+                    & .formactivity{
+                        display: inline;
+                        width: 100%;
+/
+                    & input[type="checkbox"]{
+                        color: #023244e5;
+                        margin: 10px;
+                    }
+                }
+                  & .activityName {
+                        color: #023244e5;
+                        font-size: 20px;
+                        font-weight: 600;
+                        letter-spacing: 1px;
+                        margin: 0 10px ;
+
+                    }
+                }
+              
+      
+                & .middiv {
+                    width: 200px;
+                    height: 1px;
+                    border: solid #023244e5 1px;
+                    border-style: dotted
+                }
+
+                        & .reps{
+                         display: flex;
+                            
+                            & .minDiv,
+                            & .qtyDiv{
+                                /* border-radius: 15px; */
+                                margin: 0 10px; 
+                                /* padding: 10px; */
+                                font-size: 24px;
+                                font-weight: 600;
+                                /* border: solid #023244e5 1px; */
+                                border-bottom:  solid #023244e5 1px;
+                               
+                            }
+                                           
+                }
+            }
+            & .Headername {
+                color: #fd5214;;
+                font-size: 20px;
+                font-weight: 600;
+                letter-spacing: 1px;
+                margin: 0 10px ;
+
+            }
         }
-    }
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
    
+
+& .addPhisicalActivity{
+
+    padding: 20px;
+    border-radius: 12px;
+    background-color: rgb(243, 243, 188);
+    display: flex;
+    justify-content: center;
+
+            & label,
+            & input,
+            & select,
+            & option
+            {
+           padding: 10px;
+           margin: 10px;
+           border-radius: 12px;
+           border: none;
+           background-color: beige;
+           color: #023244e5;
+           font-weight: 700;
+           border:solid #fd7e14 1px;
+           width: 100%;
+           
+            }
+
+            & label{
+                background-color:   #fd7e14;
+            }
+
+            & form{
+                background-color: #FFF8E3;
+                border-radius: 12px;
+                padding: 10px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                & .WarningDiv{
+                    display: none;
+                    align-items: center;
+                    
+
+                    & .warningImg{
+                        width:20px;
+                        margin-right: 5px;
+                    
+
+                    }
+                    & .warningMsg{
+                        color: #fc0808;
+                        font-weight: 700;
+                        margin: 0;
+
+                    }
+
+                }
+            
+            }
+
+          
+    }
+  
+& .progressinPerCent{
+    background-color: #fd7e14;
+    color: #fff;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+
+}
+}
+}
 
 
 
