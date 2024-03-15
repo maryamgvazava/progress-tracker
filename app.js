@@ -12,9 +12,11 @@ let progressinPerCent = document.querySelector('.progressinPerCent');
   let doneActivities = document.querySelector('.doneActivities');
 
   let countCheckeditems = 0;
+  let addedActivityItems = 0;
 
 
     let totalActivity = [];
+    let totaladded = [];
 
 window.onload = function() {
   let activityInput = document.querySelector('#activityInput');
@@ -40,8 +42,9 @@ window.onload = function() {
           <div class="minDiv">${selectRepeatnumber.value}</div>
           <div class="qtyDiv">${qty.value}</div>
         </div>
+     
       </div>
-      <hr/>
+    
     `;
 
     let addHeader = `<span class="Headername">⚪${activityInput.value}</span> <br/>`;
@@ -70,6 +73,7 @@ window.onload = function() {
         // Clone the checked item and append it to doneActivities
         // const clonedItem = item.cloneNode(true);
         doneActivities.appendChild(item);
+        console.log(doneActivities)
         // Further actions based on checkbox state can be added here
       } 
     //   else {
@@ -81,13 +85,43 @@ window.onload = function() {
     //   }
     }
   });
+
+
+
+  doneActivities.addEventListener('change', function(event){
+    if(event.target.matches('.mainSubmition.item input[type="checkbox"]')){
+      const checkedCheckbox = event.target;
+      const item = checkedCheckbox.closest('.mainSubmition.item');
+      if (!checkedCheckbox.checked) {
+        console.log('success!!');
+        // Clone the checked item and append it to doneActivities
+        // const clonedItem = item.cloneNode(true);
+        submittedActivitySection.appendChild(item);
+       
+  console.log(submittedActivitySection.children.length)
+        // Further actions based on checkbox state can be added here
+      } 
+    }
+  })
+
+
   
 };
+
+
+
+// let countCheckeditems = 0;
+// let addedActivityItems = 0;
+
+
+//   let totalActivity = [];
+//   let totaladded = [];
 
 // Function to log array contents and manipulate the DOM
 function logArray() {
   console.clear();
-  countCheckeditems = totalActivity.length;
+  addedActivityItems = totalActivity.length;
+  // countCheckeditems = 
   progressinPerCent.innerHTML = countCheckeditems;
 
   const container = document.createElement('div');
@@ -98,3 +132,6 @@ function logArray() {
 
 
 }
+
+
+

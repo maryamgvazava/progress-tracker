@@ -51,6 +51,8 @@ header{
 
 main{
     /* მთავარი გვერდი - სათაური */
+    padding: 0 150px;
+    background-color: #ff0505b6;
    & .mainSection{
     padding: 20px;
         background: linear-gradient(90deg, rgba(54, 95, 95, 0.519) 9%, rgba(36, 72, 116, 0.771) 100%), url("./images/main-Background.png") ;
@@ -152,15 +154,17 @@ main{
 
 
     & .phisicalActivity{
-        
-        & .submittedActivitySection{
-            background-color: #FFFEC4;
+       
+        & .submittedActivitySection,
+        & .doneActivities{
+            background-color: #FFFEC4; 
           
        & .mainSubmition{   
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
         padding: 15px;
+        border-bottom: solid gray 1px;
         
 
                 & .checkDiv{
@@ -294,6 +298,17 @@ main{
     justify-content: center;
 
 }
+
+
+
+/* & .mainSubmition{
+
+} */
+
+
+
+
+
 }
 }
 @media (max-width: 420px) {
