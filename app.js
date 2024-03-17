@@ -10,20 +10,23 @@
 
 let progressinPerCent = document.querySelector('.progressinPerCent');
   let doneActivities = document.querySelector('.doneActivities');
+  let submittedActivitySection = document.querySelector('.submittedActivitySection');
+const progressbar = document.querySelector('.progressbar')
+
 
   let countCheckeditems = 0;
   let addedActivityItems = 0;
 
 
     let totalActivity = [];
-    let totaladded = [];
+    let totalPerformed = [];
 
 window.onload = function() {
   let activityInput = document.querySelector('#activityInput');
   let selectRepeatnumber = document.querySelector('#selectRepeatnumber');
   let qty = document.querySelector('#qty');
   let submit = document.querySelector('#submit');
-  let submittedActivitySection = document.querySelector('.submittedActivitySection');
+ 
   let WarningDiv = document.querySelector('.WarningDiv');
   
 
@@ -54,11 +57,16 @@ window.onload = function() {
       WarningDiv.style.display = "none";
     } else if (selectRepeatnumber.value !== "" && qty.value !== "" && activityInput.value !== "") {
       submittedActivitySection.innerHTML += addedItems;
+    
       totalActivity.push(addedItems);
       WarningDiv.style.display = "none";
     } else {
       WarningDiv.style.display = "flex";
     }
+    const container = document.createElement('div');
+    totalActivity.forEach(htmlCode => {
+      container.innerHTML += htmlCode;
+    })
     logArray();
   });
 
@@ -67,23 +75,15 @@ window.onload = function() {
     if (event.target.matches('.mainSubmition.item input[type="checkbox"]')) {
       const checkedCheckbox = event.target;
       const item = checkedCheckbox.closest('.mainSubmition.item');
-      console.log('Checkbox state:', checkedCheckbox.checked);
+      // console.log('Checkbox state:', checkedCheckbox.checked);
       if (checkedCheckbox.checked) {
-        console.log('success');
-        // Clone the checked item and append it to doneActivities
-        // const clonedItem = item.cloneNode(true);
+        // console.log('success');
         doneActivities.appendChild(item);
-        console.log(doneActivities)
-        // Further actions based on checkbox state can be added here
-      } 
-    //   else {
-    //     // If the checkbox is unchecked, remove the corresponding item from doneActivities
-    //     const correspondingItem = doneActivities.querySelector(`#${item.id}`);
-    //     if (correspondingItem) {
-    //       correspondingItem.remove();
-    //     }
-    //   }
+        // console.log(doneActivities.childNodes.length)
+
+        totalPerformed.push(item)      } 
     }
+    logArray()
   });
 
 
@@ -93,45 +93,49 @@ window.onload = function() {
       const checkedCheckbox = event.target;
       const item = checkedCheckbox.closest('.mainSubmition.item');
       if (!checkedCheckbox.checked) {
-        console.log('success!!');
-        // Clone the checked item and append it to doneActivities
-        // const clonedItem = item.cloneNode(true);
+        // console.log('success!!');
         submittedActivitySection.appendChild(item);
-       
-  console.log(submittedActivitySection.children.length)
-        // Further actions based on checkbox state can be added here
       } 
     }
+    logArray()
   })
 
 
-  
 };
 
 
-
-// let countCheckeditems = 0;
-// let addedActivityItems = 0;
-
-
-//   let totalActivity = [];
-//   let totaladded = [];
-
-// Function to log array contents and manipulate the DOM
 function logArray() {
   console.clear();
-  addedActivityItems = totalActivity.length;
-  // countCheckeditems = 
-  progressinPerCent.innerHTML = countCheckeditems;
+  // addedActivityItems = totalActivity.length;
+ 
 
-  const container = document.createElement('div');
 
-  totalActivity.forEach(htmlCode => {
-    container.innerHTML += htmlCode;
-  });
+    const submittedActivityCount = submittedActivitySection.children.length;
+  const doneActivitiesCount = doneActivities.children.length;
+let perCent = doneActivitiesCount * 100 / (Number(submittedActivityCount) + Number(doneActivitiesCount))
 
+console.log("Submitted Activities Count:", submittedActivityCount);
+  console.log("Done Activities Count:", doneActivitiesCount);
+
+
+  if(isNaN(perCent)){
+    progressinPerCent.innerHTML = `${0}%` ;
+  } else{
+    progressinPerCent.innerHTML = `${perCent.toPrecision(3)} %`;
+  }
+    
 
 }
+
+
+function enableprogressbar(){
+  progressbar.setAttribute('role', 'progressbar')
+  progressbar.setAttribute('aria-valuenow', 30)
+  progressbar.setAttribute('aria-live', 'polite')
+}
+
+
+enableprogressbar()
 
 
 
