@@ -8,18 +8,13 @@
   
 
 
-let progressinPerCent = document.querySelector('.progressinPerCent');
+  let progressbar = document.querySelector('.progressbar');
   let doneActivities = document.querySelector('.doneActivities');
   let submittedActivitySection = document.querySelector('.submittedActivitySection');
-const progressbar = document.querySelector('.progressbar')
+  let progress = 0;
 
+  let totalActivity = [];
 
-  let countCheckeditems = 0;
-  let addedActivityItems = 0;
-
-
-    let totalActivity = [];
-    let totalPerformed = [];
 
 window.onload = function() {
   let activityInput = document.querySelector('#activityInput');
@@ -50,7 +45,10 @@ window.onload = function() {
     
     `;
 
-    let addHeader = `<span class="Headername">⚪${activityInput.value}</span> <br/>`;
+    let addHeader = `<div class="submittedHeader"><span class="Headername">⚪${activityInput.value}</span> <br/></div>`;
+
+
+
 
     if (selectRepeatnumber.value == "" && qty.value == "" && activityInput.value !== "") {
       submittedActivitySection.innerHTML += addHeader;
@@ -63,25 +61,36 @@ window.onload = function() {
     } else {
       WarningDiv.style.display = "flex";
     }
-    const container = document.createElement('div');
-    totalActivity.forEach(htmlCode => {
-      container.innerHTML += htmlCode;
-    })
+
+
+    // const container = document.createElement('div');
+    // totalActivity.forEach(htmlCode => {
+    //   container.innerHTML += htmlCode;
+    // })
     logArray();
   });
 
-  // Event delegation for checkbox changes within the added items
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   submittedActivitySection.addEventListener('change', function(event) {
     if (event.target.matches('.mainSubmition.item input[type="checkbox"]')) {
       const checkedCheckbox = event.target;
       const item = checkedCheckbox.closest('.mainSubmition.item');
-      // console.log('Checkbox state:', checkedCheckbox.checked);
       if (checkedCheckbox.checked) {
-        // console.log('success');
         doneActivities.appendChild(item);
-        // console.log(doneActivities.childNodes.length)
-
-        totalPerformed.push(item)      } 
+       } 
     }
     logArray()
   });
@@ -93,49 +102,54 @@ window.onload = function() {
       const checkedCheckbox = event.target;
       const item = checkedCheckbox.closest('.mainSubmition.item');
       if (!checkedCheckbox.checked) {
-        // console.log('success!!');
         submittedActivitySection.appendChild(item);
       } 
     }
     logArray()
   })
-
-
 };
 
 
 function logArray() {
   console.clear();
-  // addedActivityItems = totalActivity.length;
- 
 
-
-    const submittedActivityCount = submittedActivitySection.children.length;
+  const mainSubmitionDivs = submittedActivitySection.querySelectorAll('.mainSubmition');
+  let countMainSubmition = mainSubmitionDivs.length;
   const doneActivitiesCount = doneActivities.children.length;
-let perCent = doneActivitiesCount * 100 / (Number(submittedActivityCount) + Number(doneActivitiesCount))
-
-console.log("Submitted Activities Count:", submittedActivityCount);
-  console.log("Done Activities Count:", doneActivitiesCount);
+  progress =  Math.round(doneActivitiesCount * 100 / (Number(countMainSubmition) + Number(doneActivitiesCount)))
 
 
-  if(isNaN(perCent)){
-    progressinPerCent.innerHTML = `${0}%` ;
+
+  if(isNaN(progress)){
+    progress = 0
   } else{
-    progressinPerCent.innerHTML = `${perCent.toPrecision(3)} %`;
+    simulateUpload()
   }
     
 
+function enableProgessBar() {
+  progressbar.setAttribute("role", "progressbar");
+  progressbar.setAttribute("aria-valuenow", progress);
+  progressbar.setAttribute("aria-live", "polite");
 }
 
+enableProgessBar();
 
-function enableprogressbar(){
-  progressbar.setAttribute('role', 'progressbar')
-  progressbar.setAttribute('aria-valuenow', 30)
-  progressbar.setAttribute('aria-live', 'polite')
+function updateProgress(progress) {
+  progressbar.setAttribute("aria-valuenow", progress);
+  progressbar.style.setProperty("--progress", progress + "%");
 }
 
+function simulateUpload() {
 
-enableprogressbar()
-
-
-
+  progressbar.setAttribute("aria-busy", "true");
+  updateProgress(progress);
+  intervalTimer = setInterval(() => {
+    updateProgress(progress);
+    if (progress >= 100) {
+      progressbar.setAttribute("aria-busy", "false");
+      clearInterval(intervalTimer);
+    }
+  }, 500);
+}
+}
