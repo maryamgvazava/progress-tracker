@@ -393,4 +393,27 @@ main{
   
    
   }
-  
+  .submittedHeader{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .remove img{
+    color: red;
+    font-weight: bolder;
+    width: 25px;
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  .addtasks img{
+    color: green;
+    font-weight: bolder;
+    width: 25px;
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  .add_remove_icons{
+    display: flex;
+  }

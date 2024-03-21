@@ -36,31 +36,54 @@ window.onload = function() {
           </form>
           <span class="activityName">${activityInput.value}</span>
         </div>
-        <div class="reps">
-          <div class="minDiv">${selectRepeatnumber.value}</div>
-          <div class="qtyDiv">${qty.value}</div>
-        </div>
+      
      
       </div>
     
     `;
 
-    let addHeader = `<div class="submittedHeader"><span class="Headername">⚪${activityInput.value}</span> <br/></div>`;
 
 
 
+    let addHeader = `<div class="submittedHeader">
+    <span class="Headername">⚪${activityInput.value}</span> 
+    <div class="add_remove_icons">
+      <p class="remove"> <img src = "./images/minus.png" >  </p>
+      <p class="addtasks"> <img src = "./images/plus.png" >  </p>
+      <br/>
+      </div>
+      </div>`;
 
-    if (selectRepeatnumber.value == "" && qty.value == "" && activityInput.value !== "") {
-      submittedActivitySection.innerHTML += addHeader;
+
+let container;
+let newActivitySection = document.querySelector('.newActivitySection')
+    if (selectRepeatnumber.value == "" && qty.value == "" && activityInput.value !== ""){
+      container = document.createElement('div');
+      submittedActivitySection.appendChild(container);
+
+      container.classList.add('newActivitySection')
+
+      container.innerHTML += addHeader;
+
       WarningDiv.style.display = "none";
-    } else if (selectRepeatnumber.value !== "" && qty.value !== "" && activityInput.value !== "") {
-      submittedActivitySection.innerHTML += addedItems;
-    
-      totalActivity.push(addedItems);
-      WarningDiv.style.display = "none";
-    } else {
-      WarningDiv.style.display = "flex";
-    }
+
+    } 
+    // else if (selectRepeatnumber.value !== "" && qty.value !== "" && activityInput.value !== "") {
+
+    //   submittedActivitySection.innerHTML += addedItems;
+
+    //   totalActivity.push(addedItems);
+
+    //   WarningDiv.style.display = "none";
+
+    // } else {
+
+    //   WarningDiv.style.display = "flex";
+
+    // }
+
+
+
 
 
     // const container = document.createElement('div');
@@ -107,6 +130,14 @@ window.onload = function() {
     }
     logArray()
   })
+
+
+
+
+
+
+
+
 };
 
 
@@ -152,4 +183,37 @@ function simulateUpload() {
     }
   }, 500);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+  let plusbtn = document.querySelector('.addtasks')
+  let minusbtn = document.querySelector('.minus')
+  console.log(plusbtn)
+  plusbtn.addEventListener('click', function(e){
+    e.preventDefault();
+
+
+    // let addActivities = `
+    // <div class="reps">
+    // <div class="minDiv">${selectRepeatnumber.value}</div>
+    // <div class="qtyDiv">${qty.value}</div>
+    // </div>`;
+  
+    
+  console.log('hello')
+    // newActivitySection.innerHTML+=addActivities
+  })
+});
