@@ -8,95 +8,121 @@
   
 
 
-  let progressbar = document.querySelector('.progressbar');
-  let doneActivities = document.querySelector('.doneActivities');
-  let submittedActivitySection = document.querySelector('.submittedActivitySection');
+document.addEventListener('DOMContentLoaded', function() {
+  const progressbar = document.querySelector('.progressbar');
+  const doneActivities = document.querySelector('.doneActivities');
+  const submittedActivitySection = document.querySelector('.submittedActivitySection');
   let progress = 0;
 
-  let totalActivity = [];
+  const newActivitySection = document.querySelector('.newActivitySection')
+  const totalActivity = [];
 
-
-window.onload = function() {
-  let activityInput = document.querySelector('#activityInput');
-  let selectRepeatnumber = document.querySelector('#selectRepeatnumber');
-  let qty = document.querySelector('#qty');
-  let submit = document.querySelector('#submit');
- 
-  let WarningDiv = document.querySelector('.WarningDiv');
-  
+  const activityInput = document.querySelector('#activityInput');
+  const submit = document.querySelector('#submit');
+  const WarningDiv = document.querySelector('.WarningDiv');
 
   submit.addEventListener('click', function(event) {
     event.preventDefault();
 
-    let addedItems = `
-      <div class="mainSubmition item">
-        <div class="checkDiv">
-          <form action="" id="formactivity">
-            <input type="checkbox">
-          </form>
-          <span class="activityName">${activityInput.value}</span>
+  
+
+    const addHeader = `
+      <div class="submittedHeader">
+        <span class="Headername">⚪${activityInput.value}</span> 
+        <div class="add_remove_icons">
+          <p class="remove"> <img src="./images/minus.png">  </p>
+          <img src="./images/plus.png" class="addtasks" width="30" height="30"> 
         </div>
-      
-     
       </div>
-    
     `;
 
-
-
-
-    let addHeader = `<div class="submittedHeader">
-    <span class="Headername">⚪${activityInput.value}</span> 
-    <div class="add_remove_icons">
-      <p class="remove"> <img src = "./images/minus.png" >  </p>
-      <p class="addtasks"> <img src = "./images/plus.png" >  </p>
-      <br/>
-      </div>
-      </div>`;
-
-
-let container;
-let newActivitySection = document.querySelector('.newActivitySection')
-    if (selectRepeatnumber.value == "" && qty.value == "" && activityInput.value !== ""){
-      container = document.createElement('div');
+    if (activityInput.value !== "") {
+      const container = document.createElement('div');
       submittedActivitySection.appendChild(container);
-
       container.classList.add('newActivitySection')
-
       container.innerHTML += addHeader;
-
       WarningDiv.style.display = "none";
+    }
 
-    } 
-    // else if (selectRepeatnumber.value !== "" && qty.value !== "" && activityInput.value !== "") {
+    if (activityInput.value === "") {
+      WarningDiv.style.display = "flex";
+    }
+  });
 
-    //   submittedActivitySection.innerHTML += addedItems;
+  document.addEventListener('click', function(event) {
+    const target = event.target;
+    if (target.classList.contains('addtasks')) {
+      const container1 = document.createElement('div');
+      submittedActivitySection.appendChild(container1);
+      container1.classList.add('newActivitySection1')
+      container1.innerHTML += `
+        <select name="" id="selectRepeatnumber">
+          <option value="" selected disabled>amount of reps</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="130">130</option>
+          <option value="104">104</option>
+        </select>
+        <select name="" id="qty"> 
+          <option value="" selected disabled>duration of reps</option>
+          <option value="min">min</option>
+          <option value="qty">qty</option>
+        </select> 
+        <button type="submit" class="btn btn-danger add">add</button>
+      `;
+    }
+  });
 
-    //   totalActivity.push(addedItems);
-
-    //   WarningDiv.style.display = "none";
-
-    // } else {
-
-    //   WarningDiv.style.display = "flex";
-
-    // }
 
 
 
+
+  let addActivities = document.querySelector('.add')
+  addActivities.addEventListener('click', function(){
+    const addedItems = `
+    <div class="mainSubmition item">
+      <div class="checkDiv">
+        <form action="" id="formactivity">
+          <input type="checkbox">
+        </form>
+        <span class="activityName">${selectRepeatnumber.value}</span>
+        <span class="activityName">${qty.value}</span>
+      </div>
+    </div>
+  `;
+
+  let newActivitySection = document.querySelector('.newActivitySection')
+  const container1 = document.createElement('div');
+  newActivitySection.appendChild(container1);
+  container1.classList.add('newActivitySection1')
+  container1.innerHTML += addedItems;
+    totalActivity.push(addedItems);
+    WarningDiv.style.display = "none";
+    totalActivity.forEach(htmlCode => {
+      container.innerHTML += htmlCode;
+    })
+  })
+ 
+});
+
+
+
+
+    // let remove = document.querySelector('.remove')
+    // remove.addEventListener('click', function(){
+    //   //უნდა წაიშალოს ბოლოს დამატებული
+    // })
+
+
+   
+
+ 
 
 
     // const container = document.createElement('div');
-    // totalActivity.forEach(htmlCode => {
-    //   container.innerHTML += htmlCode;
-    // })
-    logArray();
-  });
 
-
-
-
-
+    // logArray();
+ 
 
 
 
@@ -107,113 +133,97 @@ let newActivitySection = document.querySelector('.newActivitySection')
 
 
   
-  submittedActivitySection.addEventListener('change', function(event) {
-    if (event.target.matches('.mainSubmition.item input[type="checkbox"]')) {
-      const checkedCheckbox = event.target;
-      const item = checkedCheckbox.closest('.mainSubmition.item');
-      if (checkedCheckbox.checked) {
-        doneActivities.appendChild(item);
-       } 
-    }
-    logArray()
-  });
-
-
-
-  doneActivities.addEventListener('change', function(event){
-    if(event.target.matches('.mainSubmition.item input[type="checkbox"]')){
-      const checkedCheckbox = event.target;
-      const item = checkedCheckbox.closest('.mainSubmition.item');
-      if (!checkedCheckbox.checked) {
-        submittedActivitySection.appendChild(item);
-      } 
-    }
-    logArray()
-  })
+  // submittedActivitySection.addEventListener('change', function(event) {
+  //   if (event.target.matches('.mainSubmition.item input[type="checkbox"]')) {
+  //     const checkedCheckbox = event.target;
+  //     const item = checkedCheckbox.closest('.mainSubmition.item');
+  //     if (checkedCheckbox.checked) {
+  //       doneActivities.appendChild(item);
+  //      } 
+  //   }
+  //   // logArray()
+  // });
 
 
 
 
+//   doneActivities.addEventListener('change', function(event){
+//     if(event.target.matches('.mainSubmition.item input[type="checkbox"]')){
+//       const checkedCheckbox = event.target;
+//       const item = checkedCheckbox.closest('.mainSubmition.item');
+//       if (!checkedCheckbox.checked) {
+//         submittedActivitySection.appendChild(item);
+//       } 
+//     }
+//     logArray()
+//   })
 
 
 
 
-};
+// function logArray() {
+//   // console.clear();
 
-
-function logArray() {
-  console.clear();
-
-  const mainSubmitionDivs = submittedActivitySection.querySelectorAll('.mainSubmition');
-  let countMainSubmition = mainSubmitionDivs.length;
-  const doneActivitiesCount = doneActivities.children.length;
-  progress =  Math.round(doneActivitiesCount * 100 / (Number(countMainSubmition) + Number(doneActivitiesCount)))
+//   const mainSubmitionDivs = submittedActivitySection.querySelectorAll('.mainSubmition');
+//   let countMainSubmition = mainSubmitionDivs.length;
+//   const doneActivitiesCount = doneActivities.children.length;
+//   progress =  Math.round(doneActivitiesCount * 100 / (Number(countMainSubmition) + Number(doneActivitiesCount)))
 
 
 
-  if(isNaN(progress)){
-    progress = 0
-  } else{
-    simulateUpload()
-  }
+//   if(isNaN(progress)){
+//     progress = 0
+//   } else{
+//     simulateUpload()
+//   }
     
 
-function enableProgessBar() {
-  progressbar.setAttribute("role", "progressbar");
-  progressbar.setAttribute("aria-valuenow", progress);
-  progressbar.setAttribute("aria-live", "polite");
-}
+// function enableProgessBar() {
+//   progressbar.setAttribute("role", "progressbar");
+//   progressbar.setAttribute("aria-valuenow", progress);
+//   progressbar.setAttribute("aria-live", "polite");
+// }
 
-enableProgessBar();
+// enableProgessBar();
 
-function updateProgress(progress) {
-  progressbar.setAttribute("aria-valuenow", progress);
-  progressbar.style.setProperty("--progress", progress + "%");
-}
+// function updateProgress(progress) {
+//   progressbar.setAttribute("aria-valuenow", progress);
+//   progressbar.style.setProperty("--progress", progress + "%");
+// }
 
-function simulateUpload() {
+// function simulateUpload() {
 
-  progressbar.setAttribute("aria-busy", "true");
-  updateProgress(progress);
-  intervalTimer = setInterval(() => {
-    updateProgress(progress);
-    if (progress >= 100) {
-      progressbar.setAttribute("aria-busy", "false");
-      clearInterval(intervalTimer);
-    }
-  }, 500);
-}
-
-
+//   progressbar.setAttribute("aria-busy", "true");
+//   updateProgress(progress);
+//   intervalTimer = setInterval(() => {
+//     updateProgress(progress);
+//     if (progress >= 100) {
+//       progressbar.setAttribute("aria-busy", "false");
+//       clearInterval(intervalTimer);
+//     }
+//   }, 500);
+// }
 
 
 
+// }
+
+// document.addEventListener('DOMContentLoaded', function() {
+//   let plusbtn = document.querySelector('.addtasks')
+//   let minusbtn = document.querySelector('.minus')
+//   console.log(plusbtn)
+//   plusbtn.addEventListener('click', function(e){
+//     e.preventDefault();
 
 
-
-
-
-
-
-
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  let plusbtn = document.querySelector('.addtasks')
-  let minusbtn = document.querySelector('.minus')
-  console.log(plusbtn)
-  plusbtn.addEventListener('click', function(e){
-    e.preventDefault();
-
-
-    // let addActivities = `
-    // <div class="reps">
-    // <div class="minDiv">${selectRepeatnumber.value}</div>
-    // <div class="qtyDiv">${qty.value}</div>
-    // </div>`;
+//     // let addActivities = `
+//     // <div class="reps">
+//     // <div class="minDiv">${selectRepeatnumber.value}</div>
+//     // <div class="qtyDiv">${qty.value}</div>
+//     // </div>`;
   
     
-  console.log('hello')
-    // newActivitySection.innerHTML+=addActivities
-  })
-});
+//   console.log('hello')
+//     // newActivitySection.innerHTML+=addActivities
+//   })
+// });
